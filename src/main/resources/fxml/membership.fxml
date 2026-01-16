@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.MembershipController" style="-fx-background-color: #FFFFFF;">
+    <top>
+        <VBox alignment="TOP_LEFT" style="-fx-border-color: #DDDDDD; -fx-border-width: 0 0 1 0; -fx-padding: 10;">
+            <HBox alignment="CENTER_LEFT" spacing="20.0">
+                <Label text="Membership Records Management" textFill="#2a6691">
+                    <font>
+                        <Font name="System Bold" size="24.0" />
+                    </font>
+                </Label>
+                <Button text="← Back to Dashboard" onAction="#handleBackToDashboard" style="-fx-background-color: #6c757d; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" />
+            </HBox>
+        </VBox>
+    </top>
+
+    <center>
+        <SplitPane dividerPositions="0.6" style="-fx-padding: 10;">
+
+            <VBox spacing="10.0" style="-fx-padding: 10;">
+                <Label text="All Membership Records" style="-fx-font-weight: bold;" />
+                <TableView fx:id="membershipTable" VBox.vgrow="ALWAYS" style="-fx-border-color: #CCCCCC;">
+                    <columns>
+                        <TableColumn fx:id="membershipIDColumn" prefWidth="100.0" text="Record ID" />
+                        <TableColumn fx:id="memberIDColumn" prefWidth="90.0" text="Member ID" />
+                        <TableColumn fx:id="membershipTypeColumn" prefWidth="120.0" text="Plan Type" />
+                        <TableColumn fx:id="startDateColumn" prefWidth="100.0" text="Start Date" />
+                        <TableColumn fx:id="endDateColumn" prefWidth="100.0" text="End Date" />
+                        <TableColumn fx:id="paymentAmountColumn" prefWidth="100.0" text="Amount" />
+                        <TableColumn fx:id="paymentDateColumn" prefWidth="100.0" text="Payment Date" />
+                        <TableColumn fx:id="paymentStatusColumn" prefWidth="100.0" text="Status" />
+                    </columns>
+                </TableView>
+                <HBox alignment="CENTER_LEFT" spacing="10.0">
+                    <Button fx:id="deleteRecordButton" text="Delete Selected Record" onAction="#handleDeleteRecord" disable="true" style="-fx-background-color: #dc3545; -fx-text-fill: white;" />
+                </HBox>
+            </VBox>
+
+            <VBox spacing="15.0" style="-fx-padding: 10; -fx-border-color: #CCCCCC; -fx-border-width: 1; -fx-background-color: #FAFAFA;">
+                <Label text="Record New Membership" style="-fx-font-weight: bold; -fx-font-size: 18;" />
+
+                <GridPane hgap="10" vgap="10">
+                    <Label text="Member:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                    <ComboBox fx:id="memberComboBox" promptText="Select Member (ID | Name)" prefWidth="250.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+                    <Label text="Plan Type:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                    <ComboBox fx:id="planTypeComboBox" promptText="Select Plan Type" prefWidth="250.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                    <Label text="Start Date:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                    <DatePicker fx:id="startDatePicker" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+                    <Label text="End Date:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                    <DatePicker fx:id="endDatePicker" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+                    <Label text="Amount Paid (Rs):" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                    <TextField fx:id="amountPaidField" GridPane.columnIndex="1" GridPane.rowIndex="4" promptText="e.g., 15000.00" />
+
+                    <Label text="Payment Date:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                    <DatePicker fx:id="paymentDatePicker" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+
+                    <Label text="Status:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+                    <ComboBox fx:id="statusComboBox" prefWidth="250.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                </GridPane>
+
+                <Label fx:id="statusLabel" />
+
+                <HBox alignment="CENTER_LEFT" spacing="10.0">
+                    <Button text="Record Membership" onAction="#handleRecordMembership" style="-fx-background-color: #28a745; -fx-text-fill: white; -fx-font-weight: bold;" />
+                    <Button text="Clear Form" onAction="#handleClearForm" />
+                </HBox>
+            </VBox>
+        </SplitPane>
+    </center>
+</BorderPane>
