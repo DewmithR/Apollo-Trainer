@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.Button?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.DashboardController" style="-fx-background-color: #F4F4F4;">
+
+    <left>
+        <VBox prefWidth="250.0" alignment="TOP_CENTER" spacing="20.0" style="-fx-background-color: #2A6691; -fx-padding: 20;">
+
+            <Label text="Apollo Trainer" textFill="WHITE">
+                <font>
+                    <Font name="System Bold" size="24.0" />
+                </font>
+                <padding>
+                    <Insets bottom="10.0" top="10.0" />
+                </padding>
+            </Label>
+
+            <Label fx:id="welcomeLabel" textFill="#BBBBBB" wrapText="true">
+                <font>
+                    <Font size="12.0" />
+                </font>
+                <padding>
+                    <Insets bottom="20.0" />
+                </padding>
+            </Label>
+
+            <VBox spacing="10.0" alignment="TOP_CENTER">
+                <Button text="Dashboard Overview" style="-fx-background-color: #5892D5; -fx-text-fill: white; -fx-font-weight: bold;" prefWidth="200.0" />
+                <Button text="🧑‍💻 System User Management" onAction="#handleUserManagement" style="-fx-background-color: transparent; -fx-text-fill: white;" prefWidth="200.0" />
+                <Button text="🧑‍💻 Member Management" onAction="#handleMemberManagement" style="-fx-background-color: transparent; -fx-text-fill: white;" prefWidth="200.0" />
+                <Button text="📏 Body Measurement Tracking" onAction="#handleMeasurementTracking" style="-fx-background-color: transparent; -fx-text-fill: white;" prefWidth="200.0" />
+                <Button text="💳 Membership &amp; Payment" onAction="#handleMembershipManagement" style="-fx-background-color: transparent; -fx-text-fill: white;" prefWidth="200.0" />
+                <Button text="🏋️ Workout Plans &amp; Tracking" onAction="#handleWorkoutManagement" style="-fx-background-color: transparent; -fx-text-fill: white;" prefWidth="200.0" />
+                <Button text="🧮 Calculators" onAction="#handleCalculatorTools" style="-fx-background-color: transparent; -fx-text-fill: white;" prefWidth="200.0" />
+                <Button text="📈 Reports Module" onAction="#handleReportsModule" style="-fx-background-color: transparent; -fx-text-fill: white;" prefWidth="200.0" />
+            </VBox>
+
+            <VBox VBox.vgrow="ALWAYS" alignment="BOTTOM_CENTER">
+                <Button text="LOGOUT" fx:id="logoutButton" onAction="#handleLogout" prefWidth="200.0" style="-fx-background-color: #D32F2F; -fx-text-fill: white; -fx-font-weight: bold;"/>
+            </VBox>
+
+        </VBox>
+    </left>
+
+    <center>
+        <VBox alignment="TOP_LEFT" spacing="20.0" style="-fx-padding: 20;">
+            <Label text="Welcome to Apollo Trainer" textFill="#333333">
+                <font>
+                    <Font name="System Bold" size="36.0" />
+                </font>
+            </Label>
+            <Label text="Select a feature from the navigation bar on the left to begin." textFill="#777777">
+                <font>
+                    <Font size="16.0" />
+                </font>
+            </Label>
+        </VBox>
+    </center>
+
+</BorderPane>
