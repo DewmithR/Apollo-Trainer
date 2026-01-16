@@ -15,7 +15,7 @@ public class ReportDAO {
     public List<MemberReportEntry> getMemberReport() {
         List<MemberReportEntry> reportList = new ArrayList<>();
 
-        // This query joins Member and Membership tables to get a comprehensive view
+        // Joins Member and Membership tables
         String sql = "SELECT M.MemberID, M.FirstName, M.LastName, " +
                 "MS.MembershipType, MS.StartDate, MS.EndDate, MS.PaymentStatus " +
                 "FROM Member M " +
@@ -56,7 +56,7 @@ public class ReportDAO {
                 "MS.MembershipType, MS.PaymentDate, MS.PaymentAmount, MS.PaymentStatus " +
                 "FROM Membership MS " +
                 "JOIN Member M ON MS.MemberID = M.MemberID " +
-                "WHERE MS.PaymentAmount IS NOT NULL AND MS.PaymentAmount > 0 " + // Filter for actual payments
+                "WHERE MS.PaymentAmount IS NOT NULL AND MS.PaymentAmount > 0 " +
                 "ORDER BY MS.PaymentDate DESC";
 
         try (Connection conn = DatabaseConnection.getConnection();
@@ -82,9 +82,7 @@ public class ReportDAO {
         return reportList;
     }
 
-    /**
-     * Calculates the total revenue from the Membership table.
-     */
+    //Calculates the total revenue from the Membership table.
     public double getTotalRevenue() {
         String sql = "SELECT SUM(PaymentAmount) AS TotalRevenue FROM Membership WHERE PaymentStatus = 'Paid'";
         double total = 0.0;
