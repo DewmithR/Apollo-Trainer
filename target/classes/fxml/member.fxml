@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.MemberController" style="-fx-background-color: #FFFFFF;">
+    <top>
+        <VBox style="-fx-border-color: #DDDDDD; -fx-border-width: 0 0 1 0; -fx-padding: 10;">
+            <Label text="Member Management (CRUD)" textFill="#2a6691">
+                <font>
+                    <Font name="System Bold" size="24.0" />
+                </font>
+            </Label>
+            <Button text="← Back to Dashboard" onAction="#handleBackToDashboard" style="-fx-background-color: #6c757d; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" />
+        </VBox>
+    </top>
+
+    <center>
+        <SplitPane dividerPositions="0.6" style="-fx-padding: 10;">
+
+            <VBox spacing="10.0" style="-fx-padding: 10;">
+                <HBox alignment="CENTER_LEFT" spacing="10.0">
+                    <Label text="Search Member:" />
+                    <TextField fx:id="searchField" promptText="Enter Name or Member ID" HBox.hgrow="ALWAYS" />
+                    <Button text="Refresh List" onAction="#loadMembers" style="-fx-background-color: #28a745; -fx-text-fill: white;" />
+                </HBox>
+
+                <TableView fx:id="memberTable" VBox.vgrow="ALWAYS" style="-fx-border-color: #CCCCCC;">
+                    <columns>
+                        <TableColumn fx:id="idColumn" prefWidth="80.0" text="ID" />
+                        <TableColumn fx:id="firstNameColumn" prefWidth="120.0" text="First Name" />
+                        <TableColumn fx:id="lastNameColumn" prefWidth="120.0" text="Last Name" />
+                        <TableColumn fx:id="contactColumn" prefWidth="150.0" text="Contact" />
+                        <TableColumn fx:id="joiningDateColumn" prefWidth="100.0" text="Joining Date" />
+                        <TableColumn fx:id="emailColumn" prefWidth="180.0" text="Email" />
+                    </columns>
+                </TableView>
+            </VBox>
+
+            <VBox spacing="15.0" style="-fx-padding: 10; -fx-border-color: #CCCCCC; -fx-border-width: 1; -fx-background-color: #FAFAFA;">
+                <Label text="Member Details" textFill="#333333">
+                    <font>
+                        <Font name="System Bold" size="18.0" />
+                    </font>
+                </Label>
+
+                <GridPane hgap="10" vgap="10">
+                    <Label text="Member ID:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                    <TextField fx:id="idField" editable="false" promptText="Generated automatically" GridPane.columnIndex="1" GridPane.rowIndex="0" style="-fx-background-color: #EFEFEF;" />
+
+                    <Label text="First Name:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                    <TextField fx:id="firstNameField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                    <Label text="Last Name:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                    <TextField fx:id="lastNameField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+                    <Label text="Contact:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                    <TextField fx:id="contactField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+                    <Label text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                    <TextField fx:id="emailField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+
+                    <Label text="Date of Birth:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                    <DatePicker fx:id="dobPicker" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+
+                    <Label text="Joining Date:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+                    <DatePicker fx:id="joiningPicker" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+
+                    <Label text="Address:" GridPane.columnIndex="0" GridPane.rowIndex="7" />
+                    <TextField fx:id="addressField" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                </GridPane>
+
+                <Label fx:id="statusLabel" textFill="#007bff" />
+
+                <HBox alignment="CENTER_LEFT" spacing="10.0" VBox.vgrow="ALWAYS">
+                    <Button fx:id="addButton" text="Add Member (Create)" onAction="#handleAddMember" style="-fx-background-color: #007bff; -fx-text-fill: white;" />
+                    <Button fx:id="updateButton" text="Update Member (Update)" onAction="#handleUpdateMember" disable="true" style="-fx-background-color: #ffc107; -fx-text-fill: #333333;" />
+                    <Button fx:id="deleteButton" text="Delete Member (Delete)" onAction="#handleDeleteMember" disable="true" style="-fx-background-color: #dc3545; -fx-text-fill: white;" />
+                    <Button fx:id="clearButton" text="Clear Form" onAction="#handleClearForm" />
+                </HBox>
+            </VBox>
+        </SplitPane>
+    </center>
+</BorderPane>
