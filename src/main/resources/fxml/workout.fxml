@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.WorkoutController" style="-fx-background-color: #FFFFFF;">
+    <top>
+        <VBox alignment="TOP_LEFT" style="-fx-border-color: #DDDDDD; -fx-border-width: 0 0 1 0; -fx-padding: 10;">
+            <HBox alignment="CENTER_LEFT" spacing="20.0">
+                <Label text="Workout Plans &amp; Assignment" textFill="#2a6691">
+                    <font>
+                        <Font name="System Bold" size="24.0" />
+                    </font>
+                </Label>
+                <Button text="← Back to Dashboard" onAction="#handleBackToDashboard" style="-fx-background-color: #6c757d; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" />
+            </HBox>
+        </VBox>
+    </top>
+
+    <center>
+        <TabPane fx:id="mainTabPane" side="TOP" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+
+            <Tab text="Plan Library">
+                <SplitPane dividerPositions="0.4" style="-fx-padding: 10;">
+
+                    <VBox spacing="10.0" style="-fx-padding: 10;">
+                        <Label text="Available Workout Plans" style="-fx-font-weight: bold;" />
+                        <TableView fx:id="planTable" VBox.vgrow="ALWAYS" style="-fx-border-color: #CCCCCC;">
+                            <columns>
+                                <TableColumn fx:id="planIDColumn" prefWidth="80.0" text="Plan ID" />
+                                <TableColumn fx:id="planNameColumn" prefWidth="200.0" text="Name" />
+                                <TableColumn fx:id="planDescriptionColumn" prefWidth="300.0" text="Description" />
+                            </columns>
+                        </TableView>
+                    </VBox>
+
+                    <VBox spacing="15.0" style="-fx-padding: 10; -fx-border-color: #CCCCCC; -fx-border-width: 1; -fx-background-color: #FAFAFA;">
+                        <Label text="Plan Details (Create/Edit)" style="-fx-font-weight: bold; -fx-font-size: 18;" />
+
+                        <GridPane hgap="10" vgap="10">
+                            <Label text="Plan ID:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                            <TextField fx:id="planIDField" editable="false" promptText="Auto-generated" GridPane.columnIndex="1" GridPane.rowIndex="0" style="-fx-background-color: #EFEFEF;" />
+
+                            <Label text="Name:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                            <TextField fx:id="planNameField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                            <Label text="Description:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                            <TextArea fx:id="planDescriptionArea" prefHeight="100.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        </GridPane>
+
+                        <Label fx:id="planStatusLabel" />
+
+                        <HBox alignment="CENTER_LEFT" spacing="10.0">
+                            <Button text="Add New Plan" onAction="#handleAddPlan" style="-fx-background-color: #007bff; -fx-text-fill: white;" />
+                            <Button fx:id="updatePlanButton" text="Update Plan" onAction="#handleUpdatePlan" disable="true" style="-fx-background-color: #ffc107; -fx-text-fill: #333333;" />
+                            <Button fx:id="deletePlanButton" text="Delete Plan" onAction="#handleDeletePlan" disable="true" style="-fx-background-color: #dc3545; -fx-text-fill: white;" />
+                            <Button text="Clear Form" onAction="#handleClearPlanForm" />
+                        </HBox>
+                    </VBox>
+                </SplitPane>
+            </Tab>
+
+            <Tab text="Member Assignment">
+                <SplitPane dividerPositions="0.6" style="-fx-padding: 10;">
+
+                    <VBox spacing="10.0" style="-fx-padding: 10;">
+                        <Label text="Current Member Assignments" style="-fx-font-weight: bold;" />
+                        <TableView fx:id="assignmentTable" VBox.vgrow="ALWAYS" style="-fx-border-color: #CCCCCC;">
+                            <columns>
+                                <TableColumn fx:id="assignmentIDColumn" prefWidth="100.0" text="Assign ID" />
+                                <TableColumn fx:id="assignedMemberIDColumn" prefWidth="100.0" text="Member ID" />
+                                <TableColumn fx:id="assignedMemberNameColumn" prefWidth="180.0" text="Member Name" />
+                                <TableColumn fx:id="assignedPlanIDColumn" prefWidth="100.0" text="Plan ID" />
+                                <TableColumn fx:id="assignedPlanNameColumn" prefWidth="200.0" text="Plan Name" />
+                                <TableColumn fx:id="assignedDateColumn" prefWidth="120.0" text="Date Assigned" />
+                            </columns>
+                        </TableView>
+                        <HBox alignment="CENTER_LEFT" spacing="10.0">
+                            <Button fx:id="deleteAssignmentButton" text="Delete Selected Assignment" onAction="#handleDeleteAssignment" disable="true" style="-fx-background-color: #dc3545; -fx-text-fill: white;" />
+                        </HBox>
+                    </VBox>
+
+                    <VBox spacing="15.0" style="-fx-padding: 10; -fx-border-color: #CCCCCC; -fx-border-width: 1; -fx-background-color: #FAFAFA;">
+                        <Label text="Assign Plan to Member" style="-fx-font-weight: bold; -fx-font-size: 18;" />
+
+                        <GridPane hgap="10" vgap="10">
+                            <Label text="Select Member:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                            <ComboBox fx:id="memberComboBox" promptText="Select Member (ID | Name)" prefWidth="250.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+                            <Label text="Select Plan:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                            <ComboBox fx:id="planComboBox" promptText="Select Workout Plan (ID | Name)" prefWidth="250.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                            <Label text="Assigned Date:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                            <DatePicker fx:id="assignedDatePicker" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        </GridPane>
+
+                        <Label fx:id="assignmentStatusLabel" />
+
+                        <HBox alignment="CENTER_LEFT" spacing="10.0">
+                            <Button text="Assign Plan" onAction="#handleAssignPlan" style="-fx-background-color: #28a745; -fx-text-fill: white; -fx-font-weight: bold;" />
+                            <Button text="Clear Form" onAction="#handleClearAssignmentForm" />
+                        </HBox>
+                    </VBox>
+                </SplitPane>
+            </Tab>
+
+        </TabPane>
+    </center>
+</BorderPane>
