@@ -21,9 +21,9 @@ import java.time.LocalDate;
 public class ReportsController {
 
     private final ReportDAO reportDAO = new ReportDAO();
-    private final DecimalFormat currencyFormat = new DecimalFormat("¤#,##0.00"); // Use local currency symbol if needed
+    private final DecimalFormat currencyFormat = new DecimalFormat("'Rs.' #,##0.00");
 
-    // --- Member Report Components ---
+    // Member Report Components
     @FXML private TableView<MemberReportEntry> memberReportTable;
     @FXML private TableColumn<MemberReportEntry, String> mrMemberIDColumn;
     @FXML private TableColumn<MemberReportEntry, String> mrFullNameColumn;
@@ -32,7 +32,7 @@ public class ReportsController {
     @FXML private TableColumn<MemberReportEntry, LocalDate> mrEndDateColumn;
     @FXML private TableColumn<MemberReportEntry, String> mrPaymentStatusColumn;
 
-    // --- Financial Report Components ---
+    // Financial Report Components
     @FXML private TableView<FinancialReportEntry> financialReportTable;
     @FXML private TableColumn<FinancialReportEntry, String> frMemberIDColumn;
     @FXML private TableColumn<FinancialReportEntry, String> frMemberNameColumn;
@@ -45,7 +45,7 @@ public class ReportsController {
 
     @FXML
     public void initialize() {
-        // --- Setup Member Report Table ---
+        // Setup Member Report Table
         mrMemberIDColumn.setCellValueFactory(new PropertyValueFactory<>("memberID"));
         mrFullNameColumn.setCellValueFactory(new PropertyValueFactory<>("fullName"));
         mrMembershipTypeColumn.setCellValueFactory(new PropertyValueFactory<>("membershipType"));
@@ -53,7 +53,7 @@ public class ReportsController {
         mrEndDateColumn.setCellValueFactory(new PropertyValueFactory<>("endDate"));
         mrPaymentStatusColumn.setCellValueFactory(new PropertyValueFactory<>("paymentStatus"));
 
-        // --- Setup Financial Report Table ---
+        // Setup Financial Report Table
         frMemberIDColumn.setCellValueFactory(new PropertyValueFactory<>("memberID"));
         frMemberNameColumn.setCellValueFactory(new PropertyValueFactory<>("memberName"));
         frMembershipTypeColumn.setCellValueFactory(new PropertyValueFactory<>("membershipType"));
@@ -74,7 +74,7 @@ public class ReportsController {
             }
         });
 
-        // --- Load Data ---
+        // Load Data
         loadReportsData();
     }
 
@@ -92,7 +92,7 @@ public class ReportsController {
         totalRevenueLabel.setText(currencyFormat.format(totalRevenue));
     }
 
-    // --- Navigation Handler ---
+    // Navigation Handler
     @FXML
     private void handleBackToDashboard(ActionEvent event) {
         try {
