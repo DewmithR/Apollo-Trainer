@@ -18,28 +18,28 @@ public class CalculatorController {
     private final DecimalFormat df = new DecimalFormat("0.0");
     private double lastCalculatedBMR = 0; // Store BMR for TDEE calculation
 
-    // --- BMI Components ---
-    @FXML private TextField bmiWeightField; // kg
-    @FXML private TextField bmiHeightField; // meters
+    // BMI Components
+    @FXML private TextField bmiWeightField;
+    @FXML private TextField bmiHeightField;
     @FXML private Label bmiResultLabel;
     @FXML private Label bmiCategoryLabel;
 
-    // --- BMR Components ---
-    @FXML private TextField bmrWeightField;  // kg
-    @FXML private TextField bmrHeightField;  // cm
+    // BMR Components
+    @FXML private TextField bmrWeightField;
+    @FXML private TextField bmrHeightField;
     @FXML private TextField bmrAgeField;
     @FXML private ComboBox<String> bmrGenderComboBox;
     @FXML private Label bmrResultLabel;
 
-    // --- TDEE Components ---
+    // TDEE Components
     @FXML private TextField tdeeBmrField;
     @FXML private ComboBox<String> activityLevelComboBox;
     @FXML private Label tdeeResultLabel;
 
-    // --- Activity Level Data ---
+    // Activity Level Data
     private final ObservableList<String> genders = FXCollections.observableArrayList("Male", "Female");
 
-    // Activity factors (Mifflin-St Jeor equation)
+    // Activity factors
     private final ObservableList<String> activityLevels = FXCollections.observableArrayList(
             "1.2 - Sedentary (little or no exercise)",
             "1.375 - Lightly Active (light exercise/sports 1-3 days/week)",
@@ -47,7 +47,6 @@ public class CalculatorController {
             "1.725 - Very Active (hard exercise/sports 6-7 days/week)",
             "1.9 - Extremely Active (hard daily exercise/physical job)"
     );
-
 
     @FXML
     public void initialize() {
@@ -61,23 +60,24 @@ public class CalculatorController {
         bmrGenderComboBox.getSelectionModel().select("Male");
         activityLevelComboBox.getSelectionModel().select(0);
 
-        // Make the BMR field in TDEE tab read-only if possible
+        // Make the BMR field in TDEE tab
         tdeeBmrField.setEditable(false);
     }
 
-    // --- BMI Calculation (kg / m^2) ---
+    // BMI Calculation
     @FXML
     private void calculateBMI() {
         try {
             double weight = Double.parseDouble(bmiWeightField.getText());
-            double height = Double.parseDouble(bmiHeightField.getText()); // Must be in meters
+            double heightCm = Double.parseDouble(bmiHeightField.getText());
+            double heightM = heightCm / 100.0;
 
-            if (height <= 0 || weight <= 0) {
+            if (heightM <= 0 || weight <= 0) {
                 showAlert("Input Error", "Weight and height must be positive values.");
                 return;
             }
 
-            double bmi = weight / (height * height);
+            double bmi = weight / (heightM * heightM);
             String category = getBMICategory(bmi);
 
             bmiResultLabel.setText("BMI: " + df.format(bmi));
@@ -95,12 +95,12 @@ public class CalculatorController {
         return "Obesity";
     }
 
-    // --- BMR Calculation (Mifflin-St Jeor Equation) ---
+    // BMR Calculation
     @FXML
     private void calculateBMR() {
         try {
-            double weight = Double.parseDouble(bmrWeightField.getText());  // kg
-            double height = Double.parseDouble(bmrHeightField.getText());  // cm
+            double weight = Double.parseDouble(bmrWeightField.getText());
+            double height = Double.parseDouble(bmrHeightField.getText());
             int age = Integer.parseInt(bmrAgeField.getText());
             String gender = bmrGenderComboBox.getValue();
 
@@ -109,21 +109,17 @@ public class CalculatorController {
                 return;
             }
 
-            // Mifflin-St Jeor Equation:
-            // P = (10.0 * weight_kg) + (6.25 * height_cm) - (5.0 * age_y) + s
             double bmr = (10.0 * weight) + (6.25 * height) - (5.0 * age);
 
             if ("Male".equals(gender)) {
                 bmr += 5;
-            } else { // Female
+            } else {
                 bmr -= 161;
             }
 
             lastCalculatedBMR = bmr;
 
             bmrResultLabel.setText("BMR: " + df.format(bmr) + " Calories/day");
-
-            // Auto-populate TDEE field
             tdeeBmrField.setText(df.format(bmr));
 
         } catch (NumberFormatException e) {
@@ -131,7 +127,7 @@ public class CalculatorController {
         }
     }
 
-    // --- TDEE Calculation (BMR * Activity Factor) ---
+    // TDEE Calculation
     @FXML
     private void calculateTDEE() {
         try {
@@ -143,12 +139,10 @@ public class CalculatorController {
                 return;
             }
 
-            // Extract the numerical factor from the ComboBox string (e.g., "1.55 - Moderately Active...")
             String factorString = selectedActivity.substring(0, selectedActivity.indexOf(' '));
             double activityFactor = Double.parseDouble(factorString);
 
             double tdee = bmr * activityFactor;
-
             tdeeResultLabel.setText("TDEE: " + df.format(tdee) + " Calories/day");
 
         } catch (NumberFormatException e) {
@@ -156,7 +150,7 @@ public class CalculatorController {
         }
     }
 
-    // --- Utility Methods ---
+    // Utility Methods
     private void showAlert(String title, String content) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
@@ -165,7 +159,7 @@ public class CalculatorController {
         alert.showAndWait();
     }
 
-    // --- Navigation Handler ---
+    // Navigation Handler
     @FXML
     private void handleBackToDashboard(ActionEvent event) {
         try {
