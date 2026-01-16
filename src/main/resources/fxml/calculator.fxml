@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.CalculatorController" style="-fx-background-color: #FFFFFF;">
+    <top>
+        <VBox alignment="TOP_LEFT" style="-fx-border-color: #DDDDDD; -fx-border-width: 0 0 1 0; -fx-padding: 10;">
+            <HBox alignment="CENTER_LEFT" spacing="20.0">
+                <Label text="Health Calculators" textFill="#2a6691">
+                    <font>
+                        <Font name="System Bold" size="24.0" />
+                    </font>
+                </Label>
+                <Button text="← Back to Dashboard" onAction="#handleBackToDashboard" style="-fx-background-color: #6c757d; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" />
+            </HBox>
+        </VBox>
+    </top>
+
+    <center>
+        <TabPane fx:id="mainTabPane" side="TOP" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+
+            <Tab text="BMI Calculator">
+                <VBox spacing="20.0" alignment="TOP_CENTER" style="-fx-padding: 40;">
+                    <Label text="Body Mass Index (BMI)" style="-fx-font-weight: bold; -fx-font-size: 20;" />
+                    <GridPane hgap="20" vgap="15" alignment="CENTER">
+                        <Label text="Weight (kg):" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                        <TextField fx:id="bmiWeightField" promptText="e.g., 75" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+                        <Label text="Height (cm):" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                        <TextField fx:id="bmiHeightField" promptText="e.g., 1.75" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                        <Button text="Calculate BMI" onAction="#calculateBMI" style="-fx-background-color: #2a6691; -fx-text-fill: white; -fx-font-weight: bold;" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                    </GridPane>
+                    <VBox fx:id="bmiResultPane" spacing="10.0" alignment="TOP_LEFT" style="-fx-padding: 20; -fx-border-color: #2a6691; -fx-border-width: 2; -fx-border-radius: 5; -fx-background-color: #f0f8ff;">
+                        <Label text="Results:" style="-fx-font-weight: bold; -fx-font-size: 16;" />
+                        <Label fx:id="bmiResultLabel" text="BMI: -" />
+                        <Label fx:id="bmiCategoryLabel" text="Category: -" />
+                    </VBox>
+                </VBox>
+            </Tab>
+
+            <Tab text="BMR Calculator">
+                <VBox spacing="20.0" alignment="TOP_CENTER" style="-fx-padding: 40;">
+                    <Label text="Basal Metabolic Rate (BMR)" style="-fx-font-weight: bold; -fx-font-size: 20;" />
+                    <GridPane hgap="20" vgap="15" alignment="CENTER">
+                        <Label text="Weight (kg):" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                        <TextField fx:id="bmrWeightField" promptText="e.g., 75" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+                        <Label text="Height (cm):" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                        <TextField fx:id="bmrHeightField" promptText="e.g., 175" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                        <Label text="Age:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                        <TextField fx:id="bmrAgeField" promptText="e.g., 30" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+                        <Label text="Gender:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                        <ComboBox fx:id="bmrGenderComboBox" promptText="Select Gender" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+                        <Button text="Calculate BMR" onAction="#calculateBMR" style="-fx-background-color: #2a6691; -fx-text-fill: white; -fx-font-weight: bold;" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                    </GridPane>
+                    <VBox fx:id="bmrResultPane" spacing="10.0" alignment="TOP_LEFT" style="-fx-padding: 20; -fx-border-color: #2a6691; -fx-border-width: 2; -fx-border-radius: 5; -fx-background-color: #f0f8ff;">
+                        <Label text="Results (BMR is calories burned at rest):" style="-fx-font-weight: bold; -fx-font-size: 16;" />
+                        <Label fx:id="bmrResultLabel" text="BMR: -" />
+                    </VBox>
+                </VBox>
+            </Tab>
+
+            <Tab text="Daily Calorie Needs">
+                <VBox spacing="20.0" alignment="TOP_CENTER" style="-fx-padding: 40;">
+                    <Label text="Daily Calorie Needs (TDEE)" style="-fx-font-weight: bold; -fx-font-size: 20;" />
+                    <GridPane hgap="20" vgap="15" alignment="CENTER">
+                        <Label text="Calculated BMR:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                        <TextField fx:id="tdeeBmrField" promptText="Enter BMR or Calculate First" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+                        <Label text="Activity Level:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                        <ComboBox fx:id="activityLevelComboBox" promptText="Select Activity Level" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                        <Button text="Calculate Daily Needs (TDEE)" onAction="#calculateTDEE" style="-fx-background-color: #2a6691; -fx-text-fill: white; -fx-font-weight: bold;" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                    </GridPane>
+                    <VBox fx:id="tdeeResultPane" spacing="10.0" alignment="TOP_LEFT" style="-fx-padding: 20; -fx-border-color: #2a6691; -fx-border-width: 2; -fx-border-radius: 5; -fx-background-color: #f0f8ff;">
+                        <Label text="Results (Total Daily Energy Expenditure):" style="-fx-font-weight: bold; -fx-font-size: 16;" />
+                        <Label fx:id="tdeeResultLabel" text="TDEE: -" />
+                        <Label text="Notes: (TDEE is your estimated daily maintenance calories.)" />
+                    </VBox>
+                </VBox>
+            </Tab>
+
+        </TabPane>
+    </center>
+</BorderPane>
