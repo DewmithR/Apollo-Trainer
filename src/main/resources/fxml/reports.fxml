@@ -31,7 +31,7 @@
 
             <Tab text="Member Status Report">
                 <VBox spacing="10.0" style="-fx-padding: 10;">
-                    <Label text="All Current Memberships (Ordered by Last Name)" style="-fx-font-weight: bold; -fx-font-size: 16;" />
+                    <Label text="All Current Memberships" style="-fx-font-weight: bold; -fx-font-size: 16;" />
                     <TableView fx:id="memberReportTable" VBox.vgrow="ALWAYS" style="-fx-border-color: #CCCCCC;">
                         <columns>
                             <TableColumn fx:id="mrMemberIDColumn" prefWidth="100.0" text="Member ID" />
@@ -54,7 +54,7 @@
                         <Label text="Total Lifetime Revenue:" style="-fx-font-weight: bold; -fx-font-size: 18;" />
                         <Label fx:id="totalRevenueLabel" text="Calculating..." style="-fx-text-fill: #008000; -fx-font-weight: bold; -fx-font-size: 18;" />
                     </HBox>
-                    <Label text="Detailed Payment Transactions (Ordered by Date)" style="-fx-font-weight: bold; -fx-font-size: 16;" />
+                    <Label text="Detailed Payment Transactions" style="-fx-font-weight: bold; -fx-font-size: 16;" />
                     <TableView fx:id="financialReportTable" VBox.vgrow="ALWAYS" style="-fx-border-color: #CCCCCC;">
                         <columns>
                             <TableColumn fx:id="frMemberIDColumn" prefWidth="100.0" text="Member ID" />
